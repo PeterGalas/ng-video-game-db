@@ -9,7 +9,7 @@ import { HttpService } from 'src/app/services/http.service';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
-export class HomeComponent implements OnInit, OnDestroy {
+export class HomeComponent implements OnInit {
   public sort!: string;
   public games!: Array<Game>;
   private routeSub!: Subscription;
@@ -34,7 +34,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   searchGames(sort: string, search?: string): void {
-    this.gameSub = this.httpService
+    this.httpService
       .getGameList(sort, search)
       .subscribe((gameList: APIResponse<Game>) => {
         this.games = gameList.results;

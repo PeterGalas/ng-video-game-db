@@ -3,9 +3,8 @@
       <mat-label>Sort</mat-label>
       <mat-select
         panelClass="sort-select"
-        [(ngModel)]="sort"
-       
-      >
+        [(ngModel)]="sort">
+        
         <mat-option value="name">Name</mat-option>
         <mat-option value="-released">Released</mat-option>
         <mat-option value="-added">Added</mat-option>
@@ -35,11 +34,10 @@
                     *ngFor="let gamePlatform of game.parent_platforms"
                     class="game-platform"
                     src="assets/images/platforms/{{ gamePlatform.platform }}.svg"
-                    alt="{{ gamePlatform.platform }}"
-                    />
-                  </div>
+                    alt="slug"/>
                 </div>
-              </div>
-            </ng-container> 
-          </div>
+            </div>
+        </div>
+    </ng-container> 
+ </div>
   
