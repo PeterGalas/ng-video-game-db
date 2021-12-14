@@ -19,6 +19,9 @@ export class HomeComponent implements OnInit, OnDestroy {
     private httpService: HttpService,
     private router: Router,
     private activatedRoute: ActivatedRoute) { }
+  ngOnDestroy(): void {
+    throw new Error('Method not implemented.');
+  }
 
   ngOnInit(): void {
     this.routeSub = this.activatedRoute.params.subscribe((params: Params) => {
@@ -39,18 +42,18 @@ export class HomeComponent implements OnInit, OnDestroy {
       });
   }
 
-  openGameDetails(id: string): void {
-    this.router.navigate(['details', id]);
-  }
+  // openGameDetails(id: string): void {
+  //   this.router.navigate(['details', id]);
+  // }
 
-  ngOnDestroy(): void {
-    if (this.gameSub) {
-      this.gameSub.unsubscribe();
-    }
+  // ngOnDestroy(): void {
+  //   if (this.gameSub) {
+  //     this.gameSub.unsubscribe();
+  //   }
 
-    if (this.routeSub) {
-      this.routeSub.unsubscribe();
-    }
-  }
+  //   if (this.routeSub) {
+  //     this.routeSub.unsubscribe();
+  //   }
+  // }
 
 }
