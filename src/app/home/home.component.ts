@@ -9,7 +9,7 @@ import { HttpService } from 'src/app/services/http.service';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, OnDestroy {
   public sort!: string;
   public games!: Array<Game>;
   private routeSub!: Subscription;
@@ -19,9 +19,6 @@ export class HomeComponent implements OnInit {
     private httpService: HttpService,
     private router: Router,
     private activatedRoute: ActivatedRoute) { }
-  ngOnDestroy(): void {
-    throw new Error('Method not implemented.');
-  }
 
   ngOnInit(): void {
     this.routeSub = this.activatedRoute.params.subscribe((params: Params) => {
@@ -34,7 +31,7 @@ export class HomeComponent implements OnInit {
   }
 
   searchGames(sort: string, search?: string): void {
-    this.httpService
+    this.gameSub = this.httpService
       .getGameList(sort, search)
       .subscribe((gameList: APIResponse<Game>) => {
         this.games = gameList.results;
@@ -42,18 +39,18 @@ export class HomeComponent implements OnInit {
       });
   }
 
-  // openGameDetails(id: string): void {
-  //   this.router.navigate(['details', id]);
-  // }
+  openGameDetails(id: string): void {
+    this.router.navigate(['details', id]);
+  }
 
-  // ngOnDestroy(): void {
-  //   if (this.gameSub) {
-  //     this.gameSub.unsubscribe();
-  //   }
+  ngOnDestroy(): void {
+    if (this.gameSub) {
+      this.gameSub.unsubscribe();
+    }
 
-  //   if (this.routeSub) {
-  //     this.routeSub.unsubscribe();
-  //   }
-  // }
+    if (this.routeSub) {
+      this.routeSub.unsubscribe();
+    }
+  }
 
 }
